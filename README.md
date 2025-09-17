@@ -62,44 +62,6 @@ This authentication service is currently powering **three production application
 - **Environment-based Configuration**: Secure environment variable management
 - **CI/CD Pipeline**: GitHub Actions for automated testing and linting
 
-## 📁 Project Structure
-
-```
-Auth Service/
-├── src/
-│   ├── config/
-│   │   ├── config.js              # Environment configuration
-│   │   ├── googleOAuth.js         # Google OAuth setup
-│   │   ├── mongoose.js            # MongoDB connection
-│   │   ├── sns.js                 # AWS SNS configuration
-│   │   └── winston.js             # Logging configuration
-│   ├── users/
-│   │   ├── userModel.js           # User schema definition
-│   │   ├── userController.js      # User route handlers
-│   │   ├── userService.js         # Business logic
-│   │   └── userRoutes.js          # User routes
-│   ├── googleOAuth/
-│   │   └── auth.js                # Google OAuth routes
-│   ├── middleware/
-│   │   └── rateLimiter.js         # Rate limiting middleware
-│   ├── utilis/
-│   │   ├── advanceFunctions.js    # Helper functions
-│   │   ├── returnResponse.js      # Response utilities
-│   │   └── logging.js             # Logging utilities
-│   └── indexRoutes.js             # Main route aggregator
-├── Docker/
-│   ├── Dockerfile                 # Production Docker image
-│   ├── Dockerfile.dev             # Development Docker image
-│   ├── compose.yaml               # Production Docker Compose
-│   └── compose.dev.yaml           # Development Docker Compose
-├── .github/
-│   └── workflows/
-│       └── backendCI.yaml         # GitHub Actions CI/CD
-├── app.js                         # Express app configuration
-├── server.js                      # Server startup
-├── package.json                   # Dependencies and scripts
-└── eslint.config.mjs              # ESLint configuration
-```
 
 ## 🚀 API Endpoints
 
@@ -110,7 +72,6 @@ Auth Service/
 
 ### Google OAuth Routes (`/api/auth`)
 - **GET** `/api/auth/google/callback` - Google OAuth callback
-- **GET** `/api/auth/google/personal` - Personal Google OAuth (restricted)
 - **GET** `/api/auth/google/verify` - Verify JWT token
 
 ### Health Check
