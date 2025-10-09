@@ -1,6 +1,6 @@
 # Authentication Service
 
-A robust, production-ready authentication service built with Express.js, providing secure user authentication through multiple methods with background email processing via AWS SNS/SQS/Lambda integration.
+A robust, authentication service built with Express.js, providing user authentication through multiple methods with background email processing via AWS SNS/SQS/Lambda integration.
 
 ## 🌟 Overview
 
@@ -279,14 +279,6 @@ This authentication service is currently serving **three production applications
 - **Security Headers**: Proper HTTP security headers
 - **Environment Variables**: Secure configuration management
 - **Docker Security**: Non-root user execution
-
-### Recommendations for Production
-- Regular security audits and dependency updates
-- Monitor authentication logs for suspicious activity
-- Implement additional monitoring for failed authentication attempts
-- Regular backup of user data and logs
-- SSL/TLS termination at load balancer level
-- Network security groups and firewall configurations
 
 ## 🤝 Contributing
 
