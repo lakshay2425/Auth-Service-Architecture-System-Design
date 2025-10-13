@@ -162,6 +162,22 @@
             border-left: 4px solid #ffc107;
             margin: 15px 0;
         }
+
+        .limitation-box {
+            background: #fff5f5;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #e53e3e;
+            margin: 15px 0;
+        }
+
+        .roadmap-box {
+            background: #f0f9ff;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #3b82f6;
+            margin: 15px 0;
+        }
         
         ul, ol {
             padding-left: 20px;
@@ -180,7 +196,6 @@
             font-size: 0.9em;
         }
         
-        /* FIXED: Contact Information Styling */
         .contact-info {
             text-align: center;
             margin: 40px 0;
@@ -278,14 +293,14 @@
     <div class="section-title">🏗️ System Architecture Overview</div>
     
     <div class="architecture-diagram">
-        <div class="diagram-text">┌─────────────────────────┐         ┌─────────────────────────┐         ┌─────────────────────────┐
-│   Resource Manager      │         │   Knowledge Store       │         │   Daily Tracker         │
-│      Frontend           │         │      Frontend           │         │      Frontend           │
-└────────┬────────────────┘         └────────┬────────────────┘         └────────┬────────────────┘
-         │                                   │                                   │
-         └─────────────────┐                 │                 ┌─────────────────┘
-                           │                 │                 │
-                           ▼                 ▼                 ▼
+        <div class="diagram-text">┌─────────────────────────┐                      ┌─────────────────────────┐
+│   Resource Manager      │                      │   Knowledge Store       │
+│      Frontend           │                      │      Frontend           │
+└────────┬────────────────┘                      └────────┬────────────────┘
+         │                                                │
+         └─────────────────┐                              │
+                           │                              │
+                           ▼                              ▼
          ┌─────────────────────────────────────────────────────────────────────────┐
          │                    🔐 Authentication Microservice                        │
          │                            (Express.js)                                 │
@@ -404,14 +419,6 @@
         <li><strong>CORS:</strong> Multi-origin support for production applications</li>
     </ul>
     
-    <!-- <p><strong>Logging Strategy:</strong></p>
-    <ul>
-        <li><strong>Winston Logger:</strong> Structured JSON logging with daily rotation</li>
-        <li><strong>Morgan Middleware:</strong> HTTP request logging</li>
-        <li><strong>Log Separation:</strong> Success and error logs in different files</li>
-        <li><strong>Retention Policy:</strong> 7 days for auth logs, 14 days for requests</li>
-    </ul> -->
-    
     <div class="section-title">🐳 Deployment Architecture</div>
     
     <p><strong>Containerization:</strong></p>
@@ -427,7 +434,6 @@
         <li>GitHub Actions for automated testing</li>
         <li>ESLint for code quality assurance</li>
         <li>Multi-version Node.js testing (18.x, 20.x, 22.x)</li>
-        <!-- <li>Automated deployment on successful builds</li> -->
     </ul>
     
     <div class="footer">
@@ -475,7 +481,6 @@
         <li><strong>Message Filtering:</strong> SQS queues receive filtered messages based on event type</li>
         <li><strong>Lambda Processing:</strong> AWS Lambda functions triggered by SQS messages</li>
         <li><strong>Email Delivery:</strong> Lambda functions handle email sending.</li>
-        <!-- <li><strong>Error Handling:</strong> Failed messages sent to Dead Letter Queue for manual review</li> -->
     </ol>
     
     <div class="section-title">🏗️ Code Organization & Best Practices</div>
@@ -512,15 +517,29 @@
         </div>
     </div>
     
-    <!-- <div class="section-title">📊 Monitoring & Observability</div>
+    <div class="section-title">⚠️ Known Limitations</div>
     
-    <p><strong>Logging Strategy:</strong></p>
-    <ul>
-        <li><strong>Structured Logging:</strong> JSON format for easy parsing and analysis</li>
-        <li><strong>Request Tracking:</strong> Unique request IDs for debugging distributed flows</li>
-        <li><strong>Error Categorization:</strong> Separate logging for different error types</li>
-        <li><strong>Performance Monitoring:</strong> Response time tracking and bottleneck identification</li>
-    </ul> -->
+    <div class="limitation-box">
+        <p><strong>Current System Constraints:</strong></p>
+        <ul>
+            <li><strong>Token Management:</strong> No refresh token strategy implemented yet - users must re-authenticate after token expiration (12 hours)</li>
+            <li><strong>Monitoring Gaps:</strong> No Dead Letter Queue (DLQ) alerting or monitoring on email pipeline - failed messages require manual investigation</li>
+            <li><strong>Performance Metrics:</strong> Limited performance benchmarks and load testing data available</li>
+            <li><strong>Observability:</strong> Basic logging implemented but lacks comprehensive monitoring and alerting</li>
+        </ul>
+    </div>
+    
+    <div class="section-title">🗺️ Roadmap & Future Enhancements</div>
+    
+    <div class="roadmap-box">
+        <p><strong>Planned Improvements:</strong></p>
+        <ul>
+            <li><strong>Testing Infrastructure:</strong> Comprehensive unit, integration, and end-to-end test suites with automated test coverage reporting</li>
+            <li><strong>Observability & Error Handling:</strong> Enhanced logging with request tracing, centralized error monitoring, and real-time alerting for critical failures</li>
+            <li><strong>Async Reliability:</strong> Dead Letter Queue monitoring, automatic retry mechanisms, and circuit breakers for email processing pipeline</li>
+            <li><strong>Token Lifecycle Management:</strong> Refresh token implementation, token rotation strategy, and graceful token renewal mechanisms</li>
+        </ul>
+    </div>
     
     <div class="highlight">
         <strong>Evolution Story:</strong> This service evolved from localStorage-based session management (with data persistence issues) to secure cookie-based authentication, solving real-world production problems encountered in previous projects.
@@ -578,15 +597,6 @@
         <p><strong>Purpose:</strong> Verify JWT token validity</p>
         <p><strong>Response:</strong> Token status and user information</p>
     </div>
-    
-    <!-- <div class="section-title">Health & Monitoring</div>
-    
-    <div class="api-endpoint">
-        <span class="endpoint-method">GET</span>
-        <strong>/health</strong>
-        <p><strong>Purpose:</strong> Service health check for monitoring systems</p>
-        <p><strong>Response:</strong> Service status, uptime, and system information</p>
-    </div> -->
     
     <div class="section-title">🔗 Integration Examples</div>
     
@@ -648,37 +658,8 @@ fetch('https://yourdomain.com/api/users/login', {<br>
             <h3><a href="https://knowledgestore.lakshaymahajan.com" target="_blank">📚 Knowledge Store</a></h3>
             <p><strong>Purpose:</strong> Book rental and management platform</p>
             <p><strong>Features:</strong> Catalog browsing, cart management, wishlist, user profiles</p>
-            <!-- <p><strong>Integration:</strong> Payment processing microservice (in development)</p> -->
         </div>
-        
-        <!-- <div class="feature-card">
-            <h3>📈 Daily Tracker</h3>
-            <p><strong>Purpose:</strong> Personal productivity and habit tracking</p>
-            <p><strong>Features:</strong> Daily activity logging, progress monitoring, analytics</p>
-            <p><strong>Privacy:</strong> Personal use only, others see landing page</p>
-        </div> -->
     </div>
-    
-    <!-- <div class="section-title">📈 System Performance Metrics</div> -->
-    
-    <!-- <div class="stats-grid">
-        <div class="stat-card">
-            <span class="stat-number">3</span>
-            <span class="stat-label">Production Apps</span>
-        </div>
-        <div class="stat-card">
-            <span class="stat-number">99.9%</span>
-            <span class="stat-label">Uptime</span>
-        </div>
-        <div class="stat-card">
-            <span class="stat-number">&lt;200ms</span>
-            <span class="stat-label">Avg Response</span>
-        </div>
-        <div class="stat-card">
-            <span class="stat-number">0</span>
-            <span class="stat-label">Security Incidents</span>
-        </div>
-    </div> -->
     
     <div class="section-title">🚀 Deployment & Infrastructure</div>
     
@@ -688,7 +669,6 @@ fetch('https://yourdomain.com/api/users/login', {<br>
         <li><strong>Database:</strong> MongoDB Atlas for reliability and backup</li>
         <li><strong>Email Processing:</strong> AWS (SNS,SQS,Lambda) for scalable messaging</li>
         <li><strong>SSL/TLS:</strong> Let's Encrypt certificates with automatic renewal</li>
-        <!-- <li><strong>Monitoring:</strong> Application logs with Winston, system health checks</li> -->
     </ul>
     
     <p><strong>Cost Optimization:</strong></p>
@@ -724,3 +704,5 @@ fetch('https://yourdomain.com/api/users/login', {<br>
         Confidential Technical Documentation - Lakshay Mahajan | Page 5 of 5
     </div>
 </div>
+</body>
+</html>
