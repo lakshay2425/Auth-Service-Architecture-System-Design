@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -97,9 +96,14 @@
         }
 
         .feature-card h3 {
-            color: #2c5282;
+            color: blue;
             margin-top: 0;
             font-size: 1.1em;
+        }
+
+        .feature-card h3 a {
+            text-decoration: none;
+            color: blue;
         }
 
         .tech-stack {
@@ -171,6 +175,20 @@
             margin: 15px 0;
         }
 
+        .security-badge {
+            background: #d4edda;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #28a745;
+            margin: 20px 0;
+        }
+
+        .security-badge a {
+            color: #155724;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
         .limitation-box {
             background: #fff5f5;
             padding: 15px;
@@ -185,6 +203,14 @@
             border-radius: 5px;
             border-left: 4px solid #3b82f6;
             margin: 15px 0;
+        }
+
+        .roadmap-box p {
+            margin: 10px 0;
+        }
+
+        .roadmap-box ul {
+            margin: 5px 0 15px 0;
         }
 
         ul,
@@ -284,14 +310,6 @@
             border-radius: 8px;
             text-align: center;
         }
-
-        .feature-card h3 {
-            color: blue;
-        }
-
-        .feature-card h3 a {
-            text-decoration: none;
-        }
     </style>
 </head>
 
@@ -312,41 +330,14 @@
             <p><strong>Developer:</strong> Lakshay Mahajan | <strong>Version:</strong> 1.0.0</p>
         </div>
 
+        <div class="security-badge">
+            <strong>⚡ Security Status:</strong> 33% improvement (50/100 → 83/100). 
+            <!-- See <a href="https://github.com/lakshay2425/Auth-Service/blob/main/SECURITY.md" target="_blank">SECURITY.md</a> for full vulnerability disclosure. -->
+        </div>
+
         <div class="section-title">🏗️ System Architecture Overview</div>
 
         <div class="architecture-diagram">
-            <!-- <div class="diagram-text">┌─────────────────────────┐                      ┌─────────────────────────┐
-│   Resource Manager      │                      │   Knowledge Store       │
-│      Frontend           │                      │      Frontend           │
-└────────┬────────────────┘                      └────────┬────────────────┘
-         │                                                │
-         └─────────────────┐                              │
-                           │                              │
-                           ▼                              ▼
-         ┌─────────────────────────────────────────────────────────────────────────┐
-         │                    🔐 Authentication Microservice                        │
-         │                            (Express.js)                                 │
-         │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐    │
-         │  │   JWT       │  │   OAuth     │  │    Rate     │  │   Winston   │    │
-         │  │  Tokens     │  │ Google 2.0  │  │  Limiting   │  │  Logging    │    │
-         │  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘    │
-         └──────────────────────┬──────────────────────────────────────────────────┘
-                                │
-                                ▼
-         ┌─────────────────────────────────────────────────────────────────────────┐
-         │                        💾 MongoDB Database                              │
-         │                      (User Data & Sessions)                             │
-         └──────────────────────┬──────────────────────────────────────────────────┘
-                                │
-                                ▼
-         ┌─────────────────────────────────────────────────────────────────────────┐
-         │                     📧 Event-Driven Email System                        │
-         │                                                                         │
-         │    AWS SNS Topic    →    AWS SQS Queue    →    AWS Lambda Function     │
-         │   (User Events)         (Message Filter)       (Email Processing)      │
-         │                                                                         │
-         │    📨 Background Email Delivery (Login/Signup Notifications)           │
-         └─────────────────────────────────────────────────────────────────────────┘</div> -->
             <img width="100%" src="./Auth Service - System Architecture.png" alt="Auth Architecture Diagram">
         </div>
 
@@ -400,7 +391,6 @@
             <div class="tech-item">AWS SNS/SQS</div>
             <div class="tech-item">AWS Lambda</div>
             <div class="tech-item">Docker</div>
-            <div class="tech-item">Winston Logger</div>
             <div class="tech-item">Google OAuth 2.0</div>
             <div class="tech-item">GitHub Actions</div>
         </div>
@@ -438,7 +428,6 @@
         <ul>
             <li><strong>Traditional:</strong> Email/password with bcrypt hashing (12 salt rounds)</li>
             <li><strong>OAuth:</strong> Google OAuth 2.0 integration</li>
-            <li><strong>Personal OAuth:</strong> Restricted access for specific users</li>
         </ul>
 
         <p><strong>Security Implementation:</strong></p>
@@ -492,8 +481,8 @@
 
             <div class="feature-card">
                 <h3>🎫 JWT Token Management</h3>
-                <p><strong>RS256 Encryption:</strong> Asymmetric key signing for enhanced security with configurable
-                    expiration times.</p>
+                <p><strong>RS256 Encryption:</strong> Asymmetric key signing for enhanced security with 12-hour
+                    expiration time.</p>
             </div>
 
             <div class="feature-card">
@@ -516,7 +505,7 @@
             <li><strong>Event Publication:</strong> Auth service publishes user events to AWS SNS topic</li>
             <li><strong>Message Filtering:</strong> SQS queues receive filtered messages based on event type</li>
             <li><strong>Lambda Processing:</strong> AWS Lambda functions triggered by SQS messages</li>
-            <li><strong>Email Delivery:</strong> Lambda functions handle email sending.</li>
+            <li><strong>Email Delivery:</strong> Lambda functions handle email sending</li>
         </ol>
 
         <div class="section-title">🏗️ Code Organization & Best Practices</div>
@@ -539,7 +528,7 @@
 
             <div class="feature-card">
                 <h3>Token Security</h3>
-                <p>RSA-256 asymmetric encryption, proper key management, and configurable expiration times.</p>
+                <p>RSA-256 asymmetric encryption, proper key management, and 12-hour token expiration.</p>
             </div>
 
             <div class="feature-card">
@@ -572,16 +561,27 @@
         <div class="section-title">🗺️ Roadmap & Future Enhancements</div>
 
         <div class="roadmap-box">
-            <p><strong>Planned Improvements:</strong></p>
+            <p><strong>⚡ Active Development - Prioritized by Impact & Timeline:</strong></p>
+            
+            <p><strong>High Priority (January 2025):</strong></p>
             <ul>
-                <li><strong>Testing Infrastructure:</strong> Comprehensive unit, integration, and end-to-end test suites
-                    with automated test coverage reporting</li>
-                <li><strong>Observability & Error Handling:</strong> Enhanced logging with request tracing, centralized
-                    error monitoring, and real-time alerting for critical failures</li>
-                <li><strong>Async Reliability:</strong> Dead Letter Queue monitoring, automatic retry mechanisms, and
-                    circuit breakers for email processing pipeline</li>
-                <li><strong>Token Lifecycle Management:</strong> Refresh token implementation, token rotation strategy,
-                    and graceful token renewal mechanisms</li>
+                <li><strong>TypeScript Migration:</strong> Full type safety across codebase, strict TypeScript configuration with ESNext features, enhanced IDE support and maintainability</li>
+                <li><strong>Integration Testing:</strong> Jest + Supertest framework, comprehensive test coverage for authentication flows, automated testing in CI/CD pipeline</li>
+                <li><strong>Active Winston Logging:</strong> Replace console.log with structured JSON logging throughout application, context-aware logging with request IDs, environment-specific log levels</li>
+            </ul>
+
+            <p><strong>Medium Priority (February 2025):</strong></p>
+            <ul>
+                <li><strong>API Documentation:</strong> Swagger/OpenAPI specification, interactive API explorer at /api-docs, request/response examples with authentication flows</li>
+                <li><strong>Redis Caching:</strong> Connection pooling configuration, session storage optimization, cache invalidation strategies for improved performance</li>
+                <li><strong>Enhanced Error Handling:</strong> Dead Letter Queue (DLQ) configuration for failed messages, retry logic with exponential backoff, CloudWatch alarm integration, email delivery status tracking</li>
+            </ul>
+
+            <p><strong>Future Enhancements:</strong></p>
+            <ul>
+                <li><strong>Enhanced CI/CD Pipeline:</strong> Automated Docker image building and publishing to Docker Hub, comprehensive test execution with coverage reports, environment-specific testing with .env.testing</li>
+                <li><strong>Token Lifecycle Management:</strong> Refresh token implementation (1-hour access token + 7-day refresh token), token rotation strategy for enhanced security</li>
+                <li><strong>Two-Factor Authentication:</strong> TOTP-based 2FA with QR code generation for optional enhanced security</li>
             </ul>
         </div>
 
@@ -696,15 +696,16 @@
         <div class="feature-grid">
             <div class="feature-card">
                 <h3><a href="https://resources.lakshaymahajan.com" target="_blank">🗂️ Resource Manager</a></h3>
-                <p><strong>Purpose:</strong> Internal resource link management system</p>
-                <p><strong>Features:</strong> CRUD operations, categorization, search functionality</p>
-                <p><strong>Users:</strong> Personal productivity</p>
+                <p><strong>Purpose:</strong> Developer resource management system</p>
+                <p><strong>Features:</strong> Multi-link bookmarks, document uploads, tag-based search, organized collections</p>
+                <p><strong>Authentication:</strong> Email/password and Google OAuth integration</p>
             </div>
 
             <div class="feature-card">
                 <h3><a href="https://knowledgestore.lakshaymahajan.com" target="_blank">📚 Knowledge Store</a></h3>
                 <p><strong>Purpose:</strong> Book rental and management platform</p>
-                <p><strong>Features:</strong> Catalog browsing, cart management, wishlist, user profiles</p>
+                <p><strong>Features:</strong> Catalog browsing, cart management, wishlist functionality, user profiles</p>
+                <p><strong>Authentication:</strong> Seamless single sign-on across platform</p>
             </div>
         </div>
 
@@ -713,8 +714,8 @@
         <p><strong>Current Infrastructure:</strong></p>
         <ul>
             <li><strong>Hosting:</strong> VPS deployment with Docker containerization</li>
-            <li><strong>Database:</strong> MongoDB Atlas for reliability and backup</li>
-            <li><strong>Email Processing:</strong> AWS (SNS,SQS,Lambda) for scalable messaging</li>
+            <li><strong>Database:</strong> MongoDB Atlas for reliability and automatic backups</li>
+            <li><strong>Email Processing:</strong> AWS (SNS, SQS, Lambda) for scalable asynchronous messaging</li>
             <li><strong>SSL/TLS:</strong> Let's Encrypt certificates with automatic renewal</li>
         </ul>
 
