@@ -549,8 +549,6 @@
             <ul>
                 <li><strong>Token Management:</strong> No refresh token strategy implemented yet - users must
                     re-authenticate after token expiration (12 hours)</li>
-                <li><strong>Monitoring Gaps:</strong> No Dead Letter Queue (DLQ) alerting or monitoring on email
-                    pipeline - failed messages require manual investigation</li>
                 <li><strong>Performance Metrics:</strong> Limited performance benchmarks and load testing data available
                 </li>
                 <li><strong>Observability:</strong> Basic logging implemented but lacks comprehensive monitoring and
@@ -567,19 +565,17 @@
             <ul>
                 <li><strong>TypeScript Migration:</strong> Full type safety across codebase, strict TypeScript configuration with ESNext features, enhanced IDE support and maintainability</li>
                 <li><strong>Integration Testing:</strong> Jest + Supertest framework, comprehensive test coverage for authentication flows, automated testing in CI/CD pipeline</li>
-                <li><strong>Active Winston Logging:</strong> Replace console.log with structured JSON logging throughout application, context-aware logging with request IDs, environment-specific log levels</li>
+                <li><strong>Redis Caching:</strong> Connection pooling configuration, session storage optimization, cache invalidation strategies for improved performance</li>
             </ul>
 
             <p><strong>Medium Priority (February 2025):</strong></p>
             <ul>
                 <li><strong>API Documentation:</strong> Swagger/OpenAPI specification, interactive API explorer at /api-docs, request/response examples with authentication flows</li>
-                <li><strong>Redis Caching:</strong> Connection pooling configuration, session storage optimization, cache invalidation strategies for improved performance</li>
-                <li><strong>Enhanced Error Handling:</strong> Dead Letter Queue (DLQ) configuration for failed messages, retry logic with exponential backoff, CloudWatch alarm integration, email delivery status tracking</li>
+                <li><strong>Active Winston Logging:</strong> Replace console.log with structured JSON logging throughout application, context-aware logging with request IDs, environment-specific log levels</li>
             </ul>
 
             <p><strong>Future Enhancements:</strong></p>
             <ul>
-                <li><strong>Enhanced CI/CD Pipeline:</strong> Automated Docker image building and publishing to Docker Hub, comprehensive test execution with coverage reports, environment-specific testing with .env.testing</li>
                 <li><strong>Token Lifecycle Management:</strong> Refresh token implementation (1-hour access token + 7-day refresh token), token rotation strategy for enhanced security</li>
                 <li><strong>Two-Factor Authentication:</strong> TOTP-based 2FA with QR code generation for optional enhanced security</li>
             </ul>
