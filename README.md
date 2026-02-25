@@ -50,12 +50,6 @@ This authentication service is currently powering **three production application
 - **Message Filtering**: Event-type based message routing
 - **Error Handling**: Robust error handling for external service failures
 
-### Monitoring & Logging
-- **Winston Logger**: Structured JSON logging with daily file rotation
-- **Request Logging**: Morgan middleware for HTTP request logging
-- **Separate Log Files**: Success and error logs in different files
-- **Log Retention**: Configurable log retention policies (7-14 days)
-
 ### Production Features
 - **Docker Support**: Multi-stage Docker builds with security best practices
 - **Health Check Endpoint**: Service health monitoring
@@ -192,10 +186,6 @@ docker-compose -f compose.yaml up -d
 
 ## 🔧 Configuration
 
-### Rate Limiting
-- Authentication endpoints: 10 requests per 5 minutes
-- Configurable via `createRateLimiter` function
-
 ### CORS Origins
 The service supports multiple client applications through configured CORS origins:
 - Local development: `http://localhost:5173`, `http://localhost:4000`
@@ -211,13 +201,6 @@ The service supports multiple client applications through configured CORS origin
   domain: ".yourdomain.com"      // Production domain
 }
 ```
-
-### Logging Configuration
-- **Success logs**: `logs/auth-service/success-YYYY-MM-DD.log`
-- **Error logs**: `logs/auth-service/error-YYYY-MM-DD.log`
-- **Request logs**: `logs/requests/access-YYYY-MM-DD.log`
-- **Retention**: 7 days for auth logs, 14 days for request logs
-- **Rotation**: Daily with 20MB max file size
 
 ## 📧 Email Processing Flow
 
@@ -260,8 +243,6 @@ curl -X POST http://localhost:5000/api/users/login \
 This authentication service is currently serving **three production applications**:
 
 1. **Resource Manager**: Internal resource management system
-2. **KS Application**: Knowledge sharing platform  
-3. **Daily Activity Tracker**: Personal productivity application
 
 ### Production Features
 - **Rolling Updates**: Zero-downtime deployment strategy
