@@ -4,7 +4,7 @@ A robust, authentication service built with Express.js, providing user authentic
 
 ## 🌟 Overview
 
-This authentication service is currently powering **three production applications** and provides:
+This authentication service is currently powering **two production applications** and provides:
 
 - **Dual Authentication Methods**: Traditional email/password and Google OAuth 2.0
 - **JWT-based Session Management**: Secure token-based authentication with RS256 signing
